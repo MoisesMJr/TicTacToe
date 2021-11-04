@@ -2,7 +2,7 @@ h1, h3{
     text-align: center;
 }
 .board {
-    border: 5px black solid;
+    border: 5px green solid;
     width: 90%;
     margin: auto;
 }
@@ -10,6 +10,10 @@ h1, h3{
     height: 150px;
     display: flex;
 }
+
+
+
+
 .box {
     width: 33.33%;
     text-align: center;
