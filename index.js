@@ -16,7 +16,7 @@ function checkWinX(){
     || $("#3").hasClass("x")
     && $("#5").hasClass("x")
     && $("#7").hasClass("x")){
-        console.log("Working")
+        return true
     }
 }
 function checkWinO(){
@@ -32,7 +32,7 @@ function checkWinO(){
     || $("#3").hasClass("o")
     && $("#5").hasClass("o")
     && $("#7").hasClass("o")){
-        console.log("Working")
+        return true
     }
 }
 
@@ -42,7 +42,10 @@ $(".box").click(function(){
         $(this).addClass("x")
         turn = 2;
         $("#turn").text(2)
-        checkWinX();
+        if(checkWinX()){
+            p1Score++
+            $("#p1-score").text(p1Score)
+        };
     }
     else
     {
@@ -50,6 +53,9 @@ $(".box").click(function(){
         $(this).addClass("o")
         turn = 1;
         $("#turn").text(1)
-        checkWinO()
+        if(checkWinO()){
+            p2Score++
+            $("#p2-score").text(p2Score)
+        }
     }
 })
