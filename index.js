@@ -2,8 +2,9 @@ var p1Score = 0;
 var p2Score = 0;
 var tie = 0;
 var turn = 1;
+var counter = 0;
 
-function checkWinX(){
+function checkWin(){
     if ($(".row-1 .box.x").length === 3
     || $(".row-2 .box.x").length === 3
     || $(".row-3 .box.x").length === 3
@@ -16,11 +17,12 @@ function checkWinX(){
     || $("#3").hasClass("x")
     && $("#5").hasClass("x")
     && $("#7").hasClass("x")){
-        return true
+        p1Score++
+        $("#p1-score").text(p1Score)
+        clear()
     }
-}
-function checkWinO(){
-    if ($(".row-1 .box.o").length === 3
+    else if 
+     ($(".row-1 .box.o").length === 3
     || $(".row-2 .box.o").length === 3
     || $(".row-3 .box.o").length === 3
     || $(".col-1.o").length === 3
@@ -32,9 +34,19 @@ function checkWinO(){
     || $("#3").hasClass("o")
     && $("#5").hasClass("o")
     && $("#7").hasClass("o")){
-        return true
+        p2Score++
+        $("#p2-score").text(p2Score)
+        clear()
+    }
+    
+    else if (counter === 9){
+        tie++
+        $("#tie").text(tie)
+        counter = 0
+        clear()
     }
 }
+
 
 $(".box").click(function(){
     if (turn === 1){
@@ -42,20 +54,25 @@ $(".box").click(function(){
         $(this).addClass("x")
         turn = 2;
         $("#turn").text(2)
-        if(checkWinX()){
-            p1Score++
-            $("#p1-score").text(p1Score)
-        };
+        counter++
+        checkWin()
     }
-    else
+    else 
     {
         $(this).text("o")
         $(this).addClass("o")
         turn = 1;
         $("#turn").text(1)
-        if(checkWinO()){
-            p2Score++
-            $("#p2-score").text(p2Score)
-        }
+        counter++
+        checkWin()
     }
 })
+
+function clear(){
+    $(".box").removeClass("x o")
+    $(".box").empty()
+    turn = 1
+    $('#turn').text("1")
+    counter = 0
+}
+
